@@ -16,10 +16,13 @@ class DosesController < ApplicationController
   end
 
   def destroy
+    @dose = Dose.find(params[:id])
+    @cocktail = @dose.cocktail
     @dose.destroy
+    redirect_to cocktail_path(@cocktail)
   end
 
   def dose_params
-    params.require(:dose).permit(:description, :ingredient, :cocktail)
+    params.require(:dose).permit(:description, :ingredient_id)
   end
 end
